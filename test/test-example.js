@@ -1,4 +1,4 @@
-runAllTestsComplete = false;
+TEST_SUITE.runAllTestsComplete = false;
 
 testTitle('manual testing of add');
 assert('add two positive numbers', add(1,1), 2);
