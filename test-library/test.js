@@ -17,7 +17,7 @@ TEST_SUITE = {
     summaryLine : document.getElementById('summary')
 };
 
-function testTitle(title) {
+function testTitle(title, tests) {
     TEST_SUITE.lastTitle.element = document.createElement("h2");
     TEST_SUITE.lastTitle.text = title;
     TEST_SUITE.lastTitle.element.classList.add('green');
@@ -26,6 +26,21 @@ function testTitle(title) {
     TEST_SUITE.runs_scope.testRuns = 0;
     TEST_SUITE.runs_scope.passedTests = 0;
     TEST_SUITE.runs_scope.failedTests = 0;
+    TEST_SUITE.actual_Test = undefined;
+
+    if(tests) {
+        try {
+            tests();
+        } catch (error) {
+            console.error(error);
+            testResultLine(" failed with an exception - " + error, false);
+            TEST_SUITE.runs_total.failedTests++;
+            TEST_SUITE.runs_scope.failedTests++;
+            TEST_SUITE.runs_scope.testRuns++;
+            let failedTest = TEST_SUITE.actual_Test? 'after ' + TEST_SUITE.actual_Test: 'in the first';
+            TEST_SUITE.lastTitle.element.innerText = title + ': failed with an exception ' + failedTest + ' test total: failed: ' + TEST_SUITE.runs_scope.failedTests + "/" + TEST_SUITE.runs_scope.testRuns;
+        }        
+    }
 }
 
 function testResultLine(string, passed) {
@@ -51,6 +66,7 @@ function testResultLine(string, passed) {
 function assert(testDescription, test, expection) {
     TEST_SUITE.runs_total.testRuns ++;
     TEST_SUITE.runs_scope.testRuns ++;
+    TEST_SUITE.actual_Test = testDescription;
     let passed = test == expection;
     if(passed){
         TEST_SUITE.runs_total.passedTests ++;
