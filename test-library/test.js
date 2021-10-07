@@ -76,9 +76,8 @@ function assert(testDescription, test, expection) {
         TEST_SUITE.runs_scope.failedTests++;
         console.error(testDescription + ' -> failed')
     }  
-    if(!passed || TEST_SUITE.runAllTestsComplete) {
-        testResultLine(testDescription, passed);
-    }   
+    if(!passed || TEST_SUITE.runAllTestsComplete) testResultLine(testDescription, passed);
+       
     TEST_SUITE.lastTitle.element.innerText = TEST_SUITE.lastTitle.text +  `: ${TEST_SUITE.runs_scope.testRuns} tests ran, ${TEST_SUITE.runs_scope.passedTests}/${TEST_SUITE.runs_scope.testRuns} passed, ${TEST_SUITE.runs_scope.failedTests} failed` 
     TEST_SUITE.summaryLine.innerText =                                      `${TEST_SUITE.runs_total.testRuns} tests ran, ${TEST_SUITE.runs_total.passedTests}/${TEST_SUITE.runs_total.testRuns} passed, ${TEST_SUITE.runs_total.failedTests} failed`
 }
