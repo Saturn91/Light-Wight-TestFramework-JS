@@ -1,6 +1,6 @@
 # Light-Wight-TestFramework-JS
 
-This is a minimalistic pure Javascript / html test framework. Aimed ad pure javascript projects.
+This is a minimalistic pure Javascript / html test framework. Aimed at pure javascript projects.
 
 ## Why?
 
